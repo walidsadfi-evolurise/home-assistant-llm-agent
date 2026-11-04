@@ -1,0 +1,18 @@
+name: home-assistant-llm-agent
+services:
+  agent:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    env_file: ../.env
+    ports:
+      - "8090:8090"
+    volumes:
+      - ../policy.yaml:/app/policy.yaml:ro
+      - agent-data:/app/data
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: [no-new-privileges:true]
+volumes:
+  agent-data:

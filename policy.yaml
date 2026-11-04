@@ -1,0 +1,40 @@
+# What the agent may see and do. Globs match entity_id. Edit for your home.
+allow:
+  - light.*
+  - switch.*
+  - cover.*
+  - climate.*
+  - media_player.*
+  - fan.*
+  - scene.*
+  - script.*
+  - vacuum.*
+  - lock.*
+  - alarm_control_panel.*
+deny:
+  - camera.*
+  - person.*
+  - device_tracker.*
+  - switch.*boiler*
+  - switch.*pump*
+  - switch.*server*
+  - switch.*freezer*
+confirm:              # always ask a human first
+  - lock.*
+  - alarm_control_panel.*
+  - cover.*garage*
+  - cover.*gate*
+  - switch.*heater*
+  - switch.*oven*
+  - script.*
+confirm_services:
+  - lock.unlock
+  - alarm_control_panel.alarm_disarm
+climate:
+  min_temperature: 15
+  max_temperature: 24
+quiet_hours:
+  start: "22:30"
+  end: "07:00"
+  confirm_domains: [media_player, vacuum, siren]
+max_actions_per_request: 8

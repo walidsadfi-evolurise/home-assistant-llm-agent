@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "home-assistant-llm-agent"
+version = "0.1.0"
+description = "Natural-language control of Home Assistant with an LLM planner, an allowlist, confirmation for risky actions, dry-run, state verification and an audit log."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Walid Sadfi", email = "walid.sadfi@evolurise.com" }]
+requires-python = ">=3.11"
+keywords = ["home-assistant", "llm", "agent", "smart-home", "domotique", "safety"]
+dependencies = [
+  "httpx>=0.27",
+  "pydantic>=2.7",
+  "pydantic-settings>=2.3",
+  "typer>=0.12",
+  "rich>=13.7",
+  "pyyaml>=6.0",
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.2", "ruff>=0.5", "mypy>=1.10", "types-PyYAML"]
+
+[project.scripts]
+ha-agent = "haagent.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "W", "SIM"]
+per-file-ignores = { "src/haagent/cli.py" = ["B008"] }
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+packages = ["haagent"]
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
