@@ -1,10 +1,10 @@
 version: 2
 updates:
   - package-ecosystem: pip
-    directory: /deploy
+    directory: /
     schedule: { interval: weekly }
   - package-ecosystem: github-actions
-    directory: /deploy
+    directory: /
     schedule: { interval: weekly }
   - package-ecosystem: docker
     directory: /deploy
